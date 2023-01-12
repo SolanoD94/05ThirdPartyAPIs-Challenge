@@ -1,6 +1,6 @@
 // ready function allows the functions inside of it to run only until the page is completely loaded. 
 $ (document).ready(function (){
-
+  
   $(function () {
     var today = dayjs();
     var nowHour = dayjs().format("HH");
@@ -9,18 +9,18 @@ $ (document).ready(function (){
     var keys = ["900", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700"]
     var description = $(".description")
 
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
+  // Code to display the current date in the header of the page.
+  $('#currentDay').text("Today is " + today.format('dddd,  MMMM D YYYY'));
+  $('#currentHour').text("Current hour: " + today.format('HH:mm'));
 
-  function render(){
-  for (var i = 0; i < keys.length; i++){
-    $(description).text(localStorage.getItem(keys[i - 1]))}
-console.log(localStorage.getItem(keys[i - 1]))
-console.log()
   
-  }render()
- 
+    // Show data from local Storage in the DOM when page is reloaded.
+  // Function written in jquery
+  function render(){
+    $(description).each(function(i){
+      $(this).text(localStorage.getItem(keys[i]));
+    })
+  } render()
     
 
   //Function to save info in local storage when save Button is clicked.
@@ -52,11 +52,13 @@ console.log()
     }
   })
 
-  
-  
+// Function to clear local Storage every new day on minute 00:01
+  function clear(){
+    const nowHour = dayjs().format("HH:mm")
+    if (nowHour == "00:01"){
+      localStorage.clear()
+    }return
+  } clear()
 
-// Code to display the current date in the header of the page.
-  $('#currentDay').text("Today is " + today.format('dddd,  MMMM D YYYY'));
-  $('#currentHour').text("Current hour: " + today.format('HH:mm'));
-  
+
 })})

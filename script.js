@@ -52,10 +52,10 @@ $ (document).ready(function (){
     }
   })
 
-// Function to clear local Storage every new day on minute 00:01
+// Function to clear local Storage every new day in hour 00:00
   function clear(){
     const nowHour = dayjs().format("HH:mm")
-    if (nowHour == "00:01"){
+    if (nowHour == "00:00"){
       localStorage.clear()
     }return
   } clear()
